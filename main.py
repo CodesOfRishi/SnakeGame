@@ -1,7 +1,7 @@
 from turtle import Turtle, Screen
 
 screen = Screen()
-screen.setup(width=1000, height=1000)
+screen.setup(width=1.0, height=1.0)
 screen.bgcolor("black")
 
 class Snake:
@@ -72,6 +72,23 @@ class Snake:
     def hit_boundry_line(self):
         head_position = self.body[0].pos()
         return head_position[0] >= 484 or head_position[1] > 396 or head_position[0] <= -484 or head_position[1] < -396
+
+def draw_boundry_line():
+    t = Turtle()
+    t.speed(0)
+    t.pencolor("white")
+    t.teleport(x=-484.00, y=418.00)
+    t.goto(484.00, 418.00)
+    t.right(90)
+    t.goto(484.00, -418.00)
+    t.right(90)
+    t.goto(-484.00, -418.00)
+    t.right(90)
+    t.goto(-484.00, 418.00)
+    t.hideturtle()
+    del t
+
+draw_boundry_line()
 
 snake = Snake()
 screen.listen()
