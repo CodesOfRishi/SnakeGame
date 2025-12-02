@@ -1,5 +1,8 @@
 from turtle import Turtle, Screen
 
+screen = Screen()
+screen.setup(width=1000, height=1000)
+
 class Snake:
     def __init__(self):
         self.body = [Turtle("square"), Turtle("square"), Turtle("square")]
@@ -28,22 +31,26 @@ class Snake:
     def turn_right(self):
         self.body[0].right(90)
 
+    def hit_itself(self):
+        for i in range(0, len(self.body)):
+            for j in range(i+1, len(self.body)):
+                x1 = round(self.body[i].xcor(), 2)
+                y1 = round(self.body[i].ycor(), 2)
+                x2 = round(self.body[j].xcor(), 2)
+                y2 = round(self.body[j].ycor(), 2)
+
+                if x1 == x2 and y1 == y2:
+                    return True
+        return False
+
+    def hit_boundry_line(self):
+        head_position = self.body[0].pos()
+        return head_position[0] >= 484 or head_position[1] > 396 or head_position[0] <= -484 or head_position[1] < -396
 
 snake = Snake()
-for _ in range(0, 5):
+
+while not (snake.hit_itself() or snake.hit_boundry_line()):
     snake.move_snake()
-
-snake.turn_left()
-
-for _ in range(0, 10):
-    snake.move_snake()
-
-snake.turn_right()
-
-for _ in range(0, 10):
-    snake.move_snake()
-
 
 # -------------
-screen = Screen()
 screen.exitonclick()
