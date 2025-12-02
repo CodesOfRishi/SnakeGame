@@ -6,7 +6,7 @@ screen.bgcolor("black")
 
 class Snake:
     def __init__(self):
-        self.body = [Turtle("square"), Turtle("square"), Turtle("square")]
+        self.body = [Turtle("turtle"), Turtle("square"), Turtle("square")]
         distance = 22
         for body_block in self.body:
             body_block.penup()
