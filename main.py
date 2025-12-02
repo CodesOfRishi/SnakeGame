@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 
 screen = Screen()
 screen.setup(width=1000, height=1000)
+screen.bgcolor("black")
 
 class Snake:
     def __init__(self):
@@ -9,6 +10,7 @@ class Snake:
         distance = 22
         for body_block in self.body:
             body_block.penup()
+            body_block.color("white")
             body_block.setheading(180)
             body_block.goto(body_block.pos()[0] + distance, body_block.pos()[1])
             distance += 22
