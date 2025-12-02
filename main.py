@@ -33,6 +33,30 @@ class Snake:
     def turn_right(self):
         self.body[0].right(90)
 
+    def move_up(self):
+        if self.body[0].heading() == 180: # facing west
+            self.turn_right()
+        elif self.body[0].heading() == 0: # facing east
+            self.turn_left()
+
+    def move_down(self):
+        if self.body[0].heading() == 180: # facing west
+            self.turn_left()
+        elif self.body[0].heading() == 0: # facing east
+            self.turn_right()
+
+    def move_right(self):
+        if self.body[0].heading() == 90: # facing north
+            self.turn_right()
+        elif self.body[0].heading() == 270: # facing south
+            self.turn_left()
+
+    def move_left(self):
+        if self.body[0].heading() == 90: # facing north
+            self.turn_left()
+        elif self.body[0].heading() == 270: # facing south
+            self.turn_right()
+
     def hit_itself(self):
         for i in range(0, len(self.body)):
             for j in range(i+1, len(self.body)):
@@ -50,6 +74,11 @@ class Snake:
         return head_position[0] >= 484 or head_position[1] > 396 or head_position[0] <= -484 or head_position[1] < -396
 
 snake = Snake()
+screen.listen()
+screen.onkey(fun=snake.move_up, key="Up")
+screen.onkey(fun=snake.move_down, key="Down")
+screen.onkey(fun=snake.move_left, key="Left")
+screen.onkey(fun=snake.move_right, key="Right")
 
 while not (snake.hit_itself() or snake.hit_boundry_line()):
     snake.move_snake()
