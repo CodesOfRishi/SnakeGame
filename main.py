@@ -2,7 +2,7 @@ from turtle import Turtle, Screen
 from random import choice
 
 screen = Screen()
-screen.setup(width=1.0, height=1.0)
+screen.setup(width=1000, height=800)
 screen.bgcolor("black")
 screen.title("The Snake Game")
 
@@ -72,22 +72,9 @@ class Snake:
     def hit_boundry_line(self):
         head_position_x = round(self.body[0].xcor(), 2)
         head_position_y = round(self.body[0].ycor(), 2)
-        return head_position_x >= 484 or head_position_y > 396 or head_position_x <= -484 or head_position_y < -396
-
-def draw_boundry_line():
-    t = Turtle()
-    t.speed(0)
-    t.pencolor("white")
-    t.teleport(x=-484.00, y=418.00)
-    t.goto(484.00, 418.00)
-    t.right(90)
-    t.goto(484.00, -418.00)
-    t.right(90)
-    t.goto(-484.00, -418.00)
-    t.right(90)
-    t.goto(-484.00, 418.00)
-    t.hideturtle()
-    del t
+        x_boundry = screen.window_width() // 2 - 20
+        y_boundry = screen.window_height() // 2 - 20
+        return not ((-1 * x_boundry) <= head_position_x <= x_boundry and (-1 * y_boundry) <= head_position_y <= y_boundry)
 
 def generate_food_coordinate():
     x_body_positions = []
@@ -108,8 +95,6 @@ def generate_food_coordinate():
             y_available.append(y_cor)
 
     return (choice(x_available), choice(y_available))
-
-draw_boundry_line()
 
 snake = Snake()
 screen.listen()
