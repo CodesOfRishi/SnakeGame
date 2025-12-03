@@ -14,8 +14,9 @@ class Snake:
             body_block.penup()
             body_block.color("white")
             body_block.setheading(180)
-            body_block.goto(body_block.pos()[0] + distance, body_block.pos()[1])
-            distance += 22
+            body_block.speed(0)
+            body_block.teleport(body_block.pos()[0] + distance, body_block.pos()[1])
+            distance += 20
         
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
@@ -54,7 +55,7 @@ class Snake:
 
     def hit_itself(self):
         for _ in range(1, len(self.body)):
-            if round(self.body[_].distance(self.body[0]), 2) < 22:
+            if round(self.body[_].distance(self.body[0]), 2) < 20:
                 return True
         return False
 
