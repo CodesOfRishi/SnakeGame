@@ -90,7 +90,7 @@ screen.onkey(fun=snake.move_left, key="Left")
 screen.onkey(fun=snake.move_right, key="Right")
 
 while not (snake.hit_itself() or snake.hit_boundry_line()):
-    snake.move_snake()
+    snake.locomotion()
 
 # -------------
 screen.exitonclick()
