@@ -88,6 +88,26 @@ def draw_boundry_line():
     t.hideturtle()
     del t
 
+def generate_food_coordinate():
+    x_body_positions = []
+    y_body_positions = []
+
+    for body_part in snake.body:
+        x_body_positions.append(body_part.xcor())
+        y_body_positions.append(body_part.ycor())
+
+    x_available = []
+    for x_cor in range(-483, 484):
+        if not (x_cor in x_body_positions):
+            x_available.append(x_cor)
+
+    y_available = []
+    for y_cor in range(-395, 395):
+        if not (y_cor in y_body_positions):
+            y_available.append(y_cor)
+
+    return (choice(x_available), choice(y_available))
+
 draw_boundry_line()
 
 snake = Snake()
@@ -97,7 +117,16 @@ screen.onkey(fun=snake.move_down, key="Down")
 screen.onkey(fun=snake.move_left, key="Left")
 screen.onkey(fun=snake.move_right, key="Right")
 
+food = Turtle("circle")
+food.penup()
+food.color("red")
+food.goto(generate_food_coordinate())
+
 while not (snake.hit_itself() or snake.hit_boundry_line()):
+    if round(snake.body[0].distance(food), 2) < 20:
+        snake.add_body_segment()
+        food.goto(generate_food_coordinate())
+
     snake.locomotion()
 
 # -------------
