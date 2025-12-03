@@ -16,17 +16,10 @@ class Snake:
             body_block.goto(body_block.pos()[0] + distance, body_block.pos()[1])
             distance += 22
         
-    def move_snake(self):
-        body_block_positions = []
-        for _ in range(0, len(self.body)-1):
-            body_block_positions.append((self.body[_].pos(), self.body[_].heading()))
-
+    def locomotion(self):
+        for i in range(len(self.body) - 1, 0, -1):
+            self.body[i].goto(self.body[i-1].pos())
         self.body[0].forward(22)
-        for i in range(0, len(self.body)-1):
-            prev_position = body_block_positions[i][0]
-            prev_heading = body_block_positions[i][1]
-            self.body[i+1].goto(prev_position[0], prev_position[1])
-            self.body[i+1].setheading(prev_heading)
 
     def turn_left(self):
         self.body[0].left(90)
