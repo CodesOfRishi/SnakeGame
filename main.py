@@ -61,8 +61,9 @@ class Snake:
         return False
 
     def hit_boundry_line(self):
-        head_position = self.body[0].pos()
-        return head_position[0] >= 484 or head_position[1] > 396 or head_position[0] <= -484 or head_position[1] < -396
+        head_position_x = round(self.body[0].xcor(), 2)
+        head_position_y = round(self.body[0].ycor(), 2)
+        return head_position_x >= 484 or head_position_y > 396 or head_position_x <= -484 or head_position_y < -396
 
 def draw_boundry_line():
     t = Turtle()
