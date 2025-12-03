@@ -52,15 +52,12 @@ class Snake:
             self.turn_right()
 
     def hit_itself(self):
-        for i in range(0, len(self.body)):
-            for j in range(i+1, len(self.body)):
-                x1 = round(self.body[i].xcor(), 2)
-                y1 = round(self.body[i].ycor(), 2)
-                x2 = round(self.body[j].xcor(), 2)
-                y2 = round(self.body[j].ycor(), 2)
+        head_position_x = round(self.body[0].xcor(), 2)
+        head_position_y = round(self.body[0].ycor(), 2)
 
-                if x1 == x2 and y1 == y2:
-                    return True
+        for i in range(1, len(self.body)):
+            if head_position_x == round(self.body[i].xcor(), 2) and head_position_y == round(self.body[i].ycor(), 2):
+                return True
         return False
 
     def hit_boundry_line(self):
