@@ -3,6 +3,7 @@ from turtle import Turtle, Screen
 screen = Screen()
 screen.setup(width=1.0, height=1.0)
 screen.bgcolor("black")
+screen.title("The Snake Game")
 
 class Snake:
     def __init__(self):
