@@ -7,7 +7,8 @@ screen.bgcolor("black")
 class Snake:
     def __init__(self):
         self.body = [Turtle("turtle"), Turtle("square"), Turtle("square")]
-        distance = 22
+
+        distance = 0
         for body_block in self.body:
             body_block.penup()
             body_block.color("white")
