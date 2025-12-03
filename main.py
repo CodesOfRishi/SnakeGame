@@ -22,7 +22,7 @@ class Snake:
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i].goto(self.body[i-1].pos())
-        self.body[0].forward(22)
+        self.body[0].forward(20)
 
     def add_body_segment(self):
         self.body.append(Turtle("square"))
