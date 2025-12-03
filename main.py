@@ -52,11 +52,8 @@ class Snake:
             self.turn_right()
 
     def hit_itself(self):
-        head_position_x = round(self.body[0].xcor(), 2)
-        head_position_y = round(self.body[0].ycor(), 2)
-
-        for i in range(1, len(self.body)):
-            if head_position_x == round(self.body[i].xcor(), 2) and head_position_y == round(self.body[i].ycor(), 2):
+        for _ in range(1, len(self.body)):
+            if round(self.body[_].distance(self.body[0]), 2) < 22:
                 return True
         return False
 
