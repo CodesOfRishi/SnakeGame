@@ -12,17 +12,10 @@ DISTANCE_GAP = 20
 
 class Snake:
     def __init__(self):
-        self.body = [Turtle("turtle"), Turtle("square"), Turtle("square")]
+        self.body = []
+        for _ in range(0,3):
+            self.add_body_segment()
 
-        distance = 0
-        for body_block in self.body:
-            body_block.penup()
-            body_block.color("white")
-            body_block.setheading(180)
-            body_block.speed(0)
-            body_block.teleport(body_block.pos()[0] + distance, body_block.pos()[1])
-            distance += DISTANCE_GAP
-        
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i].goto(self.body[i-1].pos())
@@ -32,9 +25,14 @@ class Snake:
         self.body.append(Turtle("square"))
         self.body[-1].penup()
         self.body[-1].color("white")
-        self.body[-1].setheading(self.body[-2].heading())
-        self.body[-1].speed(0)
-        self.body[-1].goto(self.body[-2].pos())
+        
+        if len(self.body) >= 2:
+            self.body[-1].setheading(self.body[-2].heading())
+            self.body[-1].goto(self.body[-2].pos())
+        else:
+            self.body[-1].setheading(180)
+
+        # self.body[-1].speed(9)
         self.body[-1].backward(DISTANCE_GAP)
 
     def up(self):
