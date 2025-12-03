@@ -71,7 +71,7 @@ class Snake:
                 return True
         return False
 
-    def hit_boundry_line(self):
+    def hit_boundry(self):
         head_position_x = round(self.body[0].xcor(), 2)
         head_position_y = round(self.body[0].ycor(), 2)
         x_boundry = screen.window_width() // 2 - 20
@@ -110,7 +110,7 @@ food.penup()
 food.color("red")
 food.goto(generate_food_coordinate())
 
-while not (snake.hit_itself() or snake.hit_boundry_line()):
+while not (snake.hit_itself() or snake.hit_boundry()):
     if round(snake.body[0].distance(food), 2) < 20:
         snake.add_body_segment()
         food.goto(generate_food_coordinate())
