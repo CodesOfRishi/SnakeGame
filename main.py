@@ -1,8 +1,10 @@
 from turtle import Turtle, Screen
 from random import choice
+from time import sleep
 
 screen = Screen()
 screen.setup(width=1000, height=800)
+screen.tracer(0)
 screen.bgcolor("black")
 screen.title("The Snake Game")
 
@@ -114,6 +116,8 @@ while not (snake.hit_itself() or snake.hit_boundry_line()):
         food.goto(generate_food_coordinate())
 
     snake.locomotion()
+    screen.update()
+    sleep(0.1)
 
 # -------------
 screen.exitonclick()
