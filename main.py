@@ -23,6 +23,15 @@ class Snake:
             self.body[i].goto(self.body[i-1].pos())
         self.body[0].forward(22)
 
+    def add_body_segment(self):
+        self.body.append(Turtle("square"))
+        self.body[-1].penup()
+        self.body[-1].color("white")
+        self.body[-1].setheading(self.body[-2].heading())
+        self.body[-1].speed(0)
+        self.body[-1].goto(self.body[-2].pos())
+        self.body[-1].backward(20)
+
     def turn_left(self):
         self.body[0].left(90)
 
