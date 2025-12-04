@@ -13,7 +13,7 @@ DISTANCE_GAP = 20
 class Snake:
     def __init__(self):
         self.body = []
-        for _ in range(0,3):
+        for _ in range(0,1):
             self.add_body_segment()
         
         self.last_move_turned = False
@@ -27,13 +27,14 @@ class Snake:
     def add_body_segment(self):
         self.body.append(Turtle("square"))
         self.body[-1].penup()
-        self.body[-1].color("white")
         
         if len(self.body) >= 2:
+            self.body[-1].color("LightGray")
             self.body[-1].setheading(self.body[-2].heading())
             self.body[-1].goto(self.body[-2].pos())
             self.body[-1].backward(DISTANCE_GAP)
         else:
+            self.body[-1].color("white")
             self.body[-1].setheading(180)
 
         # self.body[-1].speed(9)
