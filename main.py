@@ -58,8 +58,8 @@ class Snake:
         return False
 
     def hit_boundry(self):
-        head_position_x = round(self.body[0].xcor(), 2)
-        head_position_y = round(self.body[0].ycor(), 2)
+        head_position_x = self.body[0].xcor()
+        head_position_y = self.body[0].ycor()
         x_boundry = screen.window_width() // 2 - DISTANCE_GAP
         y_boundry = screen.window_height() // 2 - DISTANCE_GAP
         return not ((-1 * x_boundry) <= head_position_x <= x_boundry and (-1 * y_boundry) <= head_position_y <= y_boundry)
