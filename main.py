@@ -76,21 +76,19 @@ class Food:
         for segment in snake.body:
             snake_body_positions.append((segment.xcor(), segment.ycor()))
 
-        y_boundry = screen.window_height()
-        x_boundry = screen.window_height()
+        y_boundry = screen.window_height() // 2 - DISTANCE_GAP
+        x_boundry = screen.window_height() // 2 - DISTANCE_GAP
 
-        food_position = ()
         while True:
-            y_coordinate = randint((-1 * y_boundry) // 2 + DISTANCE_GAP, y_boundry // 2 - DISTANCE_GAP) 
-            x_coordinate = randint((-1 * x_boundry) // 2 + DISTANCE_GAP, x_boundry // 2 - DISTANCE_GAP) 
+            y_coordinate = randint(-1 * x_boundry, y_boundry) 
+            x_coordinate = randint(-1 * x_boundry, y_boundry) 
             y_coordinate = DISTANCE_GAP * (y_coordinate // DISTANCE_GAP)
             x_coordinate = DISTANCE_GAP * (x_coordinate // DISTANCE_GAP)
 
-            food_position = (x_coordinate, y_coordinate)
-            if not food_position in snake_body_positions:
+            if not (x_coordinate, y_coordinate) in snake_body_positions:
                 break
 
-        self.food_unit.teleport(food_position[0], food_position[1])
+        self.food_unit.teleport(x_coordinate, y_coordinate)
 
 snake = Snake()
 screen.listen()
