@@ -15,11 +15,14 @@ class Snake:
         self.body = []
         for _ in range(0,3):
             self.add_body_segment()
+        
+        self.can_turn = True
 
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i].goto(self.body[i-1].pos())
         self.body[0].forward(DISTANCE_GAP)
+        self.can_turn = True
 
     def add_body_segment(self):
         self.body.append(Turtle("square"))
@@ -36,20 +39,24 @@ class Snake:
         # self.body[-1].speed(9)
 
     def up(self):
-        if self.body[0].heading() != 270: # not facing down/south
+        if self.can_turn and self.body[0].heading() != 270: # not facing down/south
             self.body[0].setheading(90)
+            self.can_turn = False
 
     def down(self):
-        if self.body[0].heading() != 90: # not facing up/north
+        if self.can_turn and self.body[0].heading() != 90: # not facing up/north
             self.body[0].setheading(270)
+            self.can_turn = False
 
     def right(self):
-        if self.body[0].heading() != 180: # not facing left/west
+        if self.can_turn and self.body[0].heading() != 180: # not facing left/west
             self.body[0].setheading(0)
+            self.can_turn = False
 
     def left(self):
-        if self.body[0].heading() != 0: # not facing right/east
+        if self.can_turn and self.body[0].heading() != 0: # not facing right/east
             self.body[0].setheading(180)
+            self.can_turn = False
 
     def hit_itself(self):
         for _ in range(1, len(self.body)):
