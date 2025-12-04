@@ -8,11 +8,10 @@ screen.tracer(0)
 screen.bgcolor("black")
 screen.title("The Snake Game")
 
-DISTANCE_GAP = 20
-
 class Snake:
     def __init__(self):
         self.body = []
+        self.SEGMENT_GAP = 20
         for _ in range(0,1):
             self.add_body_segment()
         
@@ -21,7 +20,7 @@ class Snake:
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i].goto(self.body[i-1].pos())
-        self.body[0].forward(DISTANCE_GAP)
+        self.body[0].forward(self.SEGMENT_GAP)
         self.last_move_turned = False
 
     def add_body_segment(self):
@@ -32,7 +31,7 @@ class Snake:
             self.body[-1].color("LightGray")
             self.body[-1].setheading(self.body[-2].heading())
             self.body[-1].goto(self.body[-2].pos())
-            self.body[-1].backward(DISTANCE_GAP)
+            self.body[-1].backward(self.SEGMENT_GAP)
         else:
             self.body[-1].color("white")
             self.body[-1].setheading(180)
@@ -69,15 +68,15 @@ class Snake:
 
     def hit_itself(self):
         for _ in range(1, len(self.body)):
-            if round(self.body[_].distance(self.body[0]), 2) < (DISTANCE_GAP - 5):
+            if round(self.body[_].distance(self.body[0]), 2) < (self.SEGMENT_GAP - 5):
                 return True
         return False
 
     def hit_boundry(self):
         head_position_x = self.body[0].xcor()
         head_position_y = self.body[0].ycor()
-        x_boundry = screen.window_width() // 2 - DISTANCE_GAP
-        y_boundry = screen.window_height() // 2 - DISTANCE_GAP
+        x_boundry = screen.window_width() // 2 - self.SEGMENT_GAP
+        y_boundry = screen.window_height() // 2 - self.SEGMENT_GAP
         return not ((-1 * x_boundry) <= head_position_x <= x_boundry and (-1 * y_boundry) <= head_position_y <= y_boundry)
 
 class Food:
@@ -92,12 +91,12 @@ class Food:
         for segment in snake.body:
             snake_body_positions.append((segment.xcor(), segment.ycor()))
 
-        x_boundry = screen.window_width() // 2 - DISTANCE_GAP
-        y_boundry = screen.window_height() // 2 - DISTANCE_GAP
+        x_boundry = screen.window_width() // 2 - snake.SEGMENT_GAP
+        y_boundry = screen.window_height() // 2 - snake.SEGMENT_GAP
 
         while True:
-            x_coordinate = DISTANCE_GAP * (randint(-1 * x_boundry, x_boundry) // DISTANCE_GAP)
-            y_coordinate = DISTANCE_GAP * (randint(-1 * y_boundry, y_boundry) // DISTANCE_GAP)
+            x_coordinate = snake.SEGMENT_GAP * (randint(-1 * x_boundry, x_boundry) // snake.SEGMENT_GAP)
+            y_coordinate = snake.SEGMENT_GAP * (randint(-1 * y_boundry, y_boundry) // snake.SEGMENT_GAP)
 
             if not (x_coordinate, y_coordinate) in snake_body_positions:
                 break
@@ -119,7 +118,7 @@ display_score.hideturtle()
 display_score.color("green")
 
 while not (snake.hit_itself() or snake.hit_boundry()):
-    if snake.body[0].distance(food.food_unit) < (DISTANCE_GAP - 5):
+    if snake.body[0].distance(food.food_unit) < (snake.SEGMENT_GAP - 5):
         snake.add_body_segment()
         food.set_new_position()
         score += 1
@@ -129,7 +128,6 @@ while not (snake.hit_itself() or snake.hit_boundry()):
     snake.locomotion()
     screen.update()
     sleep(0.1)
-
 
 # -------------
 screen.exitonclick()
