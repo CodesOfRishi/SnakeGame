@@ -16,13 +16,13 @@ class Snake:
         for _ in range(0,3):
             self.add_body_segment()
         
-        self.can_turn = True
+        self.last_move_turned = False
 
     def locomotion(self):
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i].goto(self.body[i-1].pos())
         self.body[0].forward(DISTANCE_GAP)
-        self.can_turn = True
+        self.last_move_turned = False
 
     def add_body_segment(self):
         self.body.append(Turtle("square"))
@@ -39,24 +39,32 @@ class Snake:
         # self.body[-1].speed(9)
 
     def up(self):
-        if self.can_turn and self.body[0].heading() != 270: # not facing down/south
+        if self.body[0].heading() != 270: # not facing down/south
+            if self.last_move_turned:
+                self.locomotion()
             self.body[0].setheading(90)
-            self.can_turn = False
+            self.last_move_turned = True
 
     def down(self):
-        if self.can_turn and self.body[0].heading() != 90: # not facing up/north
+        if self.body[0].heading() != 90: # not facing up/north
+            if self.last_move_turned:
+                self.locomotion()
             self.body[0].setheading(270)
-            self.can_turn = False
+            self.last_move_turned = True
 
     def right(self):
-        if self.can_turn and self.body[0].heading() != 180: # not facing left/west
+        if self.body[0].heading() != 180: # not facing left/west
+            if self.last_move_turned:
+                self.locomotion()
             self.body[0].setheading(0)
-            self.can_turn = False
+            self.last_move_turned = True
 
     def left(self):
-        if self.can_turn and self.body[0].heading() != 0: # not facing right/east
+        if self.body[0].heading() != 0: # not facing right/east
+            if self.last_move_turned:
+                self.locomotion()
             self.body[0].setheading(180)
-            self.can_turn = False
+            self.last_move_turned = True
 
     def hit_itself(self):
         for _ in range(1, len(self.body)):
@@ -104,14 +112,23 @@ screen.onkey(fun=snake.right, key="Right")
 
 food = Food()
 
+score = 0
+display_score = Turtle()
+display_score.hideturtle()
+display_score.color("green")
+
 while not (snake.hit_itself() or snake.hit_boundry()):
     if snake.body[0].distance(food.food_unit) < (DISTANCE_GAP - 5):
         snake.add_body_segment()
         food.set_new_position()
+        score += 1
+        display_score.clear()
+        display_score.write(arg=f"Scored {score}", align="center", font=('Ariel', 36, "bold"))
 
     snake.locomotion()
     screen.update()
     sleep(0.1)
+
 
 # -------------
 screen.exitonclick()
