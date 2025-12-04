@@ -29,11 +29,11 @@ class Snake:
         if len(self.body) >= 2:
             self.body[-1].setheading(self.body[-2].heading())
             self.body[-1].goto(self.body[-2].pos())
+            self.body[-1].backward(DISTANCE_GAP)
         else:
             self.body[-1].setheading(180)
 
         # self.body[-1].speed(9)
-        self.body[-1].backward(DISTANCE_GAP)
 
     def up(self):
         if self.body[0].heading() != 270: # not facing down/south
