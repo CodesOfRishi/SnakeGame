@@ -98,6 +98,22 @@ class Food:
 
         self.food_unit.teleport(x_coordinate, y_coordinate)
 
+#### Draw Boundry Line ####
+t = Turtle()
+t.color("white")
+t.teleport(-X_BOUNDRY, Y_BOUNDRY)
+t.setheading(0)
+t.goto(X_BOUNDRY, Y_BOUNDRY)
+t.right(90)
+t.goto(X_BOUNDRY, -Y_BOUNDRY)
+t.right(90)
+t.goto(-X_BOUNDRY, -Y_BOUNDRY)
+t.right(90)
+t.goto(-X_BOUNDRY, Y_BOUNDRY)
+t.hideturtle()
+del t
+###########################
+
 snake = Snake()
 screen.listen()
 screen.onkey(fun=snake.up, key="Up")
