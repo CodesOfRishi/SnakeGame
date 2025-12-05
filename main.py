@@ -75,7 +75,11 @@ class Snake:
     def hit_boundry(self):
         head_position_x = self.body[0].xcor()
         head_position_y = self.body[0].ycor()
-        return not ((-1 * X_BOUNDRY) <= head_position_x <= X_BOUNDRY and (-1 * Y_BOUNDRY) <= head_position_y <= Y_BOUNDRY)
+        
+        if head_position_x >= X_BOUNDRY or head_position_x <= -X_BOUNDRY or head_position_y >= Y_BOUNDRY or head_position_y <= -Y_BOUNDRY:
+            return True
+        else:
+            return False
 
 class Food:
     def __init__(self):
@@ -90,8 +94,8 @@ class Food:
             snake_body_positions.append((segment.xcor(), segment.ycor()))
 
         while True:
-            x_coordinate = SEGMENT_DISTANCE * (randint(-1 * X_BOUNDRY, X_BOUNDRY) // SEGMENT_DISTANCE)
-            y_coordinate = SEGMENT_DISTANCE * (randint(-1 * Y_BOUNDRY, Y_BOUNDRY) // SEGMENT_DISTANCE)
+            x_coordinate = SEGMENT_DISTANCE * (randint(-1 * (X_BOUNDRY-20), (X_BOUNDRY-20)) // SEGMENT_DISTANCE)
+            y_coordinate = SEGMENT_DISTANCE * (randint(-1 * (Y_BOUNDRY-20), (Y_BOUNDRY-20)) // SEGMENT_DISTANCE)
 
             if not (x_coordinate, y_coordinate) in snake_body_positions:
                 break
