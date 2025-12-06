@@ -76,10 +76,7 @@ class Snake:
         head_position_x = self.body[0].xcor()
         head_position_y = self.body[0].ycor()
         
-        if head_position_x >= X_BOUNDRY or head_position_x <= -X_BOUNDRY or head_position_y >= Y_BOUNDRY or head_position_y <= -Y_BOUNDRY:
-            return True
-        else:
-            return False
+        return head_position_x >= X_BOUNDRY or head_position_x <= -X_BOUNDRY or head_position_y >= Y_BOUNDRY or head_position_y <= -Y_BOUNDRY
 
 class Food:
     def __init__(self):
