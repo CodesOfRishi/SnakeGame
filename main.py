@@ -130,6 +130,8 @@ score = 0
 display_score = Turtle()
 display_score.hideturtle()
 display_score.color("green")
+display_score.teleport(0, Y_BOUNDRY-60)
+display_score.write(arg=f"Scored {score}", align="center", font=('Ariel', 36, "bold"))
 
 while not (snake.hit_itself() or snake.hit_boundry()):
     screen.update()
@@ -142,6 +144,11 @@ while not (snake.hit_itself() or snake.hit_boundry()):
 
     snake.locomotion()
     sleep(0.1)
+
+display_game_over = Turtle()
+display_game_over.hideturtle()
+display_game_over.color("green")
+display_game_over.write(arg="Game Over!", align="center", font=('Ariel', 36, "bold"))
 
 # -------------
 screen.exitonclick()
