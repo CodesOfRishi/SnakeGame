@@ -25,8 +25,9 @@ A fun, fully functional **Snake Game** built using Python's built-in `turtle` mo
 ## 🚀 Running the Game
 
 ### Prerequisites
-- Python 3.12 or higher
-- No external packages required! Uses only the standard library (`turtle`, `random`, `time`)
+- Python 3.12 or higher.
+- `python3-tk` system package.
+- No external packages required! Uses only the standard library (`turtle`, `random`, `time`).
 
 ### How to Run
 
